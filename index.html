@@ -83,8 +83,7 @@ body::before{
 
 /* CONTENIDO */
 #contenido{
-  display:none;
-  padding-bottom:200px;
+  padding-bottom:350px;
 }
 
 /* HEADER */
@@ -226,23 +225,23 @@ button:hover{ background:#a8894f; }
 /* BOTONES FLOTANTES */
 .cart{
   position:fixed;
-  right:30px;
+  right:25px;
   padding:14px 22px;
   border-radius:30px;
   font-weight:bold;
   cursor:pointer;
-  z-index:999;
+  z-index:10;
   transition:0.3s;
 }
 
 .cart.reserva{
-  bottom:90px;
+  bottom:140px;
   background:#c6a969;
   color:white;
 }
 
 .cart.pedido{
-  bottom:30px;
+  bottom:70px;
   background:#4b3f2f;
   color:white;
 }
@@ -313,6 +312,10 @@ button:hover{ background:#a8894f; }
 
 .creditos a:hover{
   text-decoration:underline;
+}
+footer{
+  position:relative;
+  z-index:20;
 }
 </style>
 </head>
@@ -393,6 +396,14 @@ button:hover{ background:#a8894f; }
   </a>
   <a href="https://www.facebook.com/share/14XoS4YxZRS/" target="_blank">
     <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png">
+  </a>
+</div>
+
+<div class="creditos">
+  © 2026 Yoyo's Bar & Mar · Desarrollo y diseño por 
+  <strong>Josué Lopez</strong> · 
+  <a href="https://instagram.com/blazemodejj" target="_blank">
+    @blazemodejj
   </a>
 </div>
 
@@ -574,13 +585,5 @@ function loadJarras(){
 loadJarras();
 
 </script>
-
-<footer class="creditos">
-  © 2026 Yoyo's Bar & Mar · Desarrollo y diseño por 
-  <strong>Josué Lopez</strong> · 
-  <a href="https://instagram.com/blazemodejj" target="_blank">
-    @blazemodejj
-  </a>
-</footer>
 </body>
 </html>
