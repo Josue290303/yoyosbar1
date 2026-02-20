@@ -369,6 +369,43 @@ footer{
   transform:translateY(-3px);
   box-shadow:0 12px 25px rgba(0,0,0,0.6);
 }
+.reserva-box{
+  margin-top:25px;
+  text-align:center;
+}
+
+.reserva-box p{
+  margin-bottom:10px;
+  font-size:15px;
+  font-weight:500;
+}
+
+.btn-reserva{
+  background:linear-gradient(145deg,#d4b37a,#b89555);
+  color:white;
+  border:none;
+  padding:14px 22px;
+  border-radius:30px;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 6px 15px rgba(0,0,0,0.2);
+  transition:all 0.3s ease;
+}
+
+.btn-reserva:hover{
+  transform:translateY(-3px);
+  box-shadow:0 10px 20px rgba(0,0,0,0.3);
+}
+.btn-reserva::before{
+  content:"↓ ";
+  animation:flecha 1s infinite;
+}
+
+@keyframes flecha{
+  0%{transform:translateY(0);}
+  50%{transform:translateY(4px);}
+  100%{transform:translateY(0);}
+}
 </style>
 </head>
 <body>
@@ -425,8 +462,14 @@ footer{
 
     <p id="mesaSeleccionada" style="margin-top:10px; font-weight:bold;"></p>
     <button class="btn-pedido" onclick="abrirPedido()">
-  Enviar Pedido
-</button>
+    Enviar Pedido
+    </button>
+    <div class="reserva-box">
+  <p>¿Deseas hacer una reserva?</p>
+  <button class="btn-reserva" onclick="abrirReserva()">
+    👉 Click aquí para reservar
+  </button>
+</div>
   </div>
 
 </div>
@@ -448,8 +491,6 @@ footer{
   <img src="img/momento13.jpeg">
 </div>
 </section>
-
-<div class="cart reserva" onclick="abrirReserva()">Reservar</div>
 
 <footer>
 
