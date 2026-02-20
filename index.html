@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yoyo's Bar & Mar</title>
+<link rel="icon" href="img/logoyoyo.jpeg">
+
+<style>
+
+*{
+  box-sizing:border-box;
+}
+
+html, body{
+  margin:0;
+  padding:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:transparent;
+  color:#4b3f2f;
+  min-height:100%;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+  linear-gradient(
+    rgba(245,239,230,0.55),
+    rgba(245,239,230,0.65)
+  ),
+  url("img/fondo.jpeg");
+  background-size:cover;
+  background-position:center;
+  background-attachment:fixed;
+  z-index:-1;
+}
+
+/* PANTALLA INICIAL */
+.inicio{
+  position:fixed;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  background:
+  linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)),
+  url("img/fondo.jpeg");
+  background-size:cover;
+  background-position:center;
+  z-index:999;
+  text-align:center;
+  padding:20px;
+}
+
+.inicio img{
+  width:200px;
+  height:200px;
+  border-radius:50%;
+  object-fit:cover;
+  cursor:pointer;
+  box-shadow:0 0 30px #c6a969;
+  transition:0.3s;
+}
+
+.inicio img:hover{ transform:scale(1.05); }
+
+.inicio h1{
+  margin-top:20px;
+  font-size:34px;
+  color:white;
+  text-shadow:0 4px 15px rgba(0,0,0,0.8);
+}
+
+.inicio p{
+  margin-top:10px;
+  font-size:16px;
+  color:white;
+  text-shadow:0 3px 10px rgba(0,0,0,0.8);
+}
+
+/* CONTENIDO */
+#contenido{
+  display:none;
+  padding-bottom:200px;
+}
+
+/* HEADER */
+header{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:15px;
+  padding:25px;
+  font-size:28px;
+  font-weight:bold;
+  color:white;
+  text-shadow:0 4px 15px rgba(0,0,0,0.8);
+}
+
+.logo-small{
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  object-fit:cover;
+}
+
+/* SECCIONES */
+.section{
+  margin:15px 20px;
+  border:1px solid #e0d6c8;
+  border-radius:10px;
+  overflow:hidden;
+  background:#ffffff;
+  box-shadow:0 5px 15px rgba(0,0,0,0.05);
+}
+
+.section h2{
+  margin:0;
+  padding:18px;
+  background:#f0e6d8;
+  cursor:pointer;
+  color:#8b6f47;
+  text-align:center;
+}
+
+.content{
+  display:none;
+  padding:15px;
+  background:#fffaf3;
+}
+
+.item{
+  padding:15px 0;
+  border-bottom:1px solid #e5ddd0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+  text-align:center;
+}
+
+.item:last-child{ border:none; }
+
+select{
+  background:#f5efe6;
+  color:#4b3f2f;
+  border:1px solid #d8cbb8;
+  padding:6px;
+  border-radius:6px;
+}
+
+button{
+  background:#c6a969;
+  color:white;
+  border:none;
+  padding:6px 12px;
+  cursor:pointer;
+  font-weight:bold;
+  border-radius:6px;
+  transition:0.3s;
+}
+
+button:hover{ background:#a8894f; }
+
+/* INPUTS */
+.mesa-box{
+  width:100%;
+  max-width:500px;
+  margin:80px auto;
+  padding:0 20px;
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.mesa-box input{
+  width:100%;
+  padding:16px;
+  border-radius:12px;
+  border:1px solid #d8cbb8;
+  background:#fffaf3;
+  color:#4b3f2f;
+  text-align:center;
+  font-size:16px;
+}
+
+/* GALERIA */
+.galeria{
+  padding:40px 0;
+  text-align:center;
+}
+
+.galeria h2{
+  font-size:28px;
+  color:white;
+  text-shadow:0 4px 15px rgba(0,0,0,0.8);
+  margin-bottom:20px;
+}
+
+.slider{
+  display:flex;
+  gap:20px;
+  overflow-x:auto;
+  padding:20px;
+  scroll-snap-type:x mandatory;
+}
+
+.slider img{
+  width:280px;
+  height:350px;
+  object-fit:cover;
+  border-radius:20px;
+  transition:0.4s;
+  box-shadow:0 10px 25px rgba(0,0,0,0.1);
+  scroll-snap-align:center;
+}
+
+.slider img:hover{
+  transform:scale(1.05);
+}
+
+/* BOTONES FLOTANTES */
+.cart{
+  position:fixed;
+  right:30px;
+  padding:14px 22px;
+  border-radius:30px;
+  font-weight:bold;
+  cursor:pointer;
+  z-index:999;
+  transition:0.3s;
+}
+
+.cart.reserva{
+  bottom:90px;
+  background:#c6a969;
+  color:white;
+}
+
+.cart.pedido{
+  bottom:30px;
+  background:#4b3f2f;
+  color:white;
+}
+
+/* BOTÓN ENTRAR */
+.btn-entrar{
+  margin-top:25px;
+  padding:14px 30px;
+  font-size:18px;
+  font-weight:bold;
+  border:none;
+  border-radius:30px;
+  background:#c6a969;
+  color:white;
+  cursor:pointer;
+  box-shadow:0 5px 20px rgba(0,0,0,0.4);
+  transition:0.3s;
+}
+
+.btn-entrar:hover{
+  transform:scale(1.05);
+  background:#b89555;
+}
+.redes{
+  display:flex;
+  justify-content:center;
+  gap:25px;
+  margin-top:15px;
+}
+
+.redes img{
+  width:35px;
+  height:35px;
+  transition:0.3s;
+}
+
+.redes img:hover{
+  transform:scale(1.2);
+}
+.footer-info{
+  text-align:center;
+  margin-top:40px;
+  padding-bottom:30px;
+}
+
+.logo-footer{
+  width:80px;
+  height:80px;
+  border-radius:50%;
+  object-fit:cover;
+  margin-bottom:10px;
+  opacity:0.9;
+}
+.creditos{
+  text-align:center;
+  padding:20px;
+  font-size:14px;
+  background:#f5efe6;
+  color:#4b3f2f;
+  border-top:1px solid #e0d6c8;
+}
+
+.creditos a{
+  color:#c6a969;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+.creditos a:hover{
+  text-decoration:underline;
+}
+</style>
+</head>
+<body>
+
+<div class="inicio" id="inicio">
+  <img src="img/logoyoyo.jpeg" id="logoInicio">
+  <h1>Yoyo's Bar y Mar</h1>
+  <p class="direccion">Jr. San Pedro cuadra 10 - Tarapoto</p>
+
+  <button class="btn-entrar" onclick="entrar()">
+    Clic aquí para ingresar
+  </button>
+</div>
+
+<div id="contenido">
+
+<header>
+  <img src="img/logoyoyo.jpeg" class="logo-small">
+  Yoyo's Bar & Mar
+</header>
+
+<div class="section">
+<h2 onclick="toggle(this)">Cocktails</h2>
+<div class="content" id="cocktails"></div>
+</div>
+
+<div class="section">
+<h2 onclick="toggle(this)">Jarras</h2>
+<div class="content" id="jarras"></div>
+</div>
+
+<div class="section">
+<h2 onclick="toggle(this)">Piqueos</h2>
+<div class="content" id="piqueos"></div>
+</div>
+
+<div class="section">
+<h2 onclick="toggle(this)">Platos</h2>
+<div class="content" id="platos"></div>
+</div>
+
+<div class="mesa-box">
+  <input id="nombre" type="text" placeholder="Tu nombre">
+  <input id="mesa" type="number" placeholder="Número de Mesa">
+</div>
+
+<section class="galeria">
+<h2>Momentos en Yoyo's</h2>
+<div class="slider">
+  <img src="img/momento1.jpeg">
+  <img src="img/momento2.jpeg">
+  <img src="img/momento3.jpeg">
+  <img src="img/momento4.jpeg">
+  <img src="img/momento5.jpeg">
+  <img src="img/momento6.jpeg">
+  <img src="img/momento7.jpeg">
+  <img src="img/momento8.jpeg">
+</div>
+</section>
+
+<div class="cart reserva" onclick="abrirReserva()">Reservar</div>
+<div class="cart pedido" onclick="abrirPedido()">Enviar Pedido</div>
+
+<footer>
+
+<div class="footer-info">
+  <img src="img/logoyoyo.jpeg" class="logo-footer">
+  <p>Jr. San Pedro cuadra 10 - Tarapoto</p>
+</div>
+
+<div class="redes">
+  <a href="https://www.instagram.com/yoyostpp/" target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png">
+  </a>
+  <a href="https://www.tiktok.com/@yoyostpp?_r=1&_t=ZS-942byspRrs7" target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png">
+  </a>
+  <a href="https://www.facebook.com/share/14XoS4YxZRS/" target="_blank">
+    <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png">
+  </a>
+</div>
+
+</footer>
+</div>
+
+<script>
+
+/* TU JAVASCRIPT ORIGINAL COMPLETO SIN CAMBIOS */
+
+const phone="51927047053";
+
+let pedido={
+  cocktails:[],
+  jarras:[],
+  piqueos:[],
+  platos:[]
+};
+
+window.addEventListener("DOMContentLoaded", function() {
+  document.getElementById("logoInicio").addEventListener("click", entrar);
+});
+
+function entrar(){
+  document.getElementById("inicio").style.display="none";
+  document.getElementById("contenido").style.display="block";
+}
+
+function toggle(el){
+  const content=el.nextElementSibling;
+  content.style.display=content.style.display==="block"?"none":"block";
+}
+
+function add(cat,nombre,precio){
+  pedido[cat].push(nombre+" - S/"+precio);
+  alert(nombre+" agregado");
+}
+
+function addJarra(nombre, selectId){
+  const value = document.getElementById(selectId).value;
+  const partes = value.split("-");
+  const size = partes[0];
+  const precio = partes[1];
+
+  pedido.jarras.push(nombre+" "+size+" - S/"+precio);
+  alert(nombre+" agregado");
+}
+
+function addLimonada(){
+  const tipo = document.getElementById("limonada_tipo").value;
+  const sizeValue = document.getElementById("limonada_size").value;
+
+  const partes = sizeValue.split("-");
+  const size = partes[0];
+  const precio = partes[1];
+
+  pedido.jarras.push("Limonada "+tipo+" "+size+" - S/"+precio);
+  alert("Limonada agregada");
+}
+
+function abrirPedido(){
+  const nombre=document.getElementById("nombre").value;
+  const mesa=document.getElementById("mesa").value;
+
+  if(!nombre){ alert("Ingrese su nombre"); return; }
+  if(!mesa){ alert("Ingrese número de mesa"); return; }
+
+  let mensaje="YOYO PEDIDO\n\n";
+  mensaje+="Cliente: "+nombre+"\n";
+  mensaje+="Mesa: "+mesa+"\n\n";
+
+  Object.keys(pedido).forEach(cat=>{
+    if(pedido[cat].length>0){
+      mensaje+=cat.toUpperCase()+":\n";
+      pedido[cat].forEach(p=> mensaje+="• "+p+"\n");
+      mensaje+="\n";
+    }
+  });
+
+  window.location.href="https://wa.me/"+phone+"?text="+encodeURIComponent(mensaje);
+}
+
+function abrirReserva(){
+
+  const nombre = prompt("¿Quién hace la reserva?");
+  if(!nombre) return;
+
+  const personas = prompt("¿Cuántas personas serán?");
+  if(!personas) return;
+
+  const hora = prompt("Hora de llegada (Ej: 8:30 PM):");
+  if(!hora) return;
+
+  let mensaje="YOYO RESERVA\n\n";
+  mensaje+="Nombre: "+nombre+"\n";
+  mensaje+="Personas: "+personas+"\n";
+  mensaje+="Hora: "+hora;
+
+  window.location.href="https://wa.me/"+phone+"?text="+encodeURIComponent(mensaje);
+}
+
+function load(id,arr,cat){
+  const c=document.getElementById(id);
+  arr.forEach(i=>{
+    c.innerHTML+=`
+    <div class="item">
+      <span>${i.nombre} - S/${i.precio}</span>
+      <button onclick="add('${cat}','${i.nombre}','${i.precio}')">+</button>
+    </div>`;
+  });
+}
+
+load("cocktails",[
+{nombre:"Cuba Libre",precio:8},
+{nombre:"Chilcano de Pisco",precio:10},
+{nombre:"Daiquiri",precio:10},
+{nombre:"Pisco Sour",precio:10},
+{nombre:"Mojito",precio:10},
+{nombre:"Piña Colada",precio:10},
+{nombre:"Machu Picchu",precio:10},
+{nombre:"Pisco Atardecer",precio:10},
+{nombre:"Pantera Rosa",precio:10},
+{nombre:"Tinto de Verano",precio:12},
+{nombre:"Sangría",precio:12},
+{nombre:"Calimocho",precio:12}
+],"cocktails");
+
+load("piqueos",[
+{nombre:"Chifle",precio:3},
+{nombre:"Canchita",precio:3}
+],"piqueos");
+
+load("platos",[
+{nombre:"Ceviche",precio:15},
+{nombre:"Ceviche Mixto",precio:15},
+{nombre:"Arroz con Mariscos",precio:15}
+],"platos");
+
+function loadJarras(){
+    const c=document.getElementById("jarras");
+
+    c.innerHTML += `
+    <div class="item">
+    <span>Maracuyachado</span>
+    <select id="maracuyachado_size">
+        <option value="1L-24">1 Litro - S/24</option>
+        <option value="1/2L-12">1/2 Litro - S/12</option>
+    </select>
+    <button onclick="addJarra('Maracuyachado','maracuyachado_size')">+</button>
+    </div>
+
+    <div class="item">
+    <span>Maracumango</span>
+    <select id="maracumango_size">
+        <option value="1L-24">1 Litro - S/24</option>
+        <option value="1/2L-12">1/2 Litro - S/12</option>
+    </select>
+    <button onclick="addJarra('Maracumango','maracumango_size')">+</button>
+    </div>
+
+    <div class="item">
+    <span>Limonada</span>
+    <select id="limonada_tipo">
+        <option value="Clásica">Clásica</option>
+        <option value="Hierba Luisa">Hierba Luisa</option>
+        <option value="Frozen">Frozen</option>
+    </select>
+
+    <select id="limonada_size">
+      <option value="1L-16">1 Litro - S/16</option>
+      <option value="1/2L-8">1/2 Litro - S/8</option>
+    </select>
+
+    <button onclick="addLimonada()">+</button>
+  </div>
+  `;
+}
+
+loadJarras();
+
+</script>
+
+<footer class="creditos">
+  © 2026 Yoyo's Bar & Mar · Desarrollo y diseño por 
+  <strong>Josué Lopez</strong> · 
+  <a href="https://instagram.com/blazemodejj" target="_blank">
+    @blazemodejj
+  </a>
+</footer>
+</body>
+</html>
