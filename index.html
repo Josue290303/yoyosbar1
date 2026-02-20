@@ -83,7 +83,7 @@ body::before{
 
 /* CONTENIDO */
 #contenido{
-  padding-bottom:350px;
+  padding-bottom:40px;
 }
 
 /* HEADER */
@@ -317,6 +317,58 @@ footer{
   position:relative;
   z-index:20;
 }
+/* BOTONES DE MESAS PRO */
+#mesas{
+  display:flex;
+  justify-content:center;
+  gap:15px;
+  flex-wrap:wrap;
+  margin-top:10px;
+}
+
+#mesas button{
+  padding:14px 22px;
+  font-size:16px;
+  font-weight:bold;
+  border-radius:12px;
+  border:none;
+  cursor:pointer;
+  background:linear-gradient(145deg,#d4b37a,#b89555);
+  color:white;
+  box-shadow:0 6px 15px rgba(0,0,0,0.2);
+  transition:all 0.3s ease;
+}
+
+#mesas button:hover{
+  transform:translateY(-3px);
+  box-shadow:0 10px 20px rgba(0,0,0,0.3);
+}
+
+#mesas button.activa{
+  background:black;
+  transform:scale(1.05);
+  box-shadow:0 10px 25px rgba(0,0,0,0.6);
+}
+
+.btn-pedido{
+  margin-top:20px;
+  padding:16px;
+  width:100%;
+  border-radius:14px;
+  border:none;
+  font-size:18px;
+  font-weight:bold;
+  cursor:pointer;
+  background:black;
+  color:white;
+  box-shadow:0 8px 20px rgba(0,0,0,0.4);
+  transition:all 0.3s ease;
+}
+
+.btn-pedido:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 25px rgba(0,0,0,0.6);
+}
 </style>
 </head>
 <body>
@@ -360,25 +412,44 @@ footer{
 
 <div class="mesa-box">
   <input id="nombre" type="text" placeholder="Tu nombre">
-  <input id="mesa" type="number" placeholder="Número de Mesa">
+
+  <div style="text-align:center;">
+    <p><strong>Selecciona tu mesa:</strong></p>
+
+    <div id="mesas">
+      <button type="button" onclick="seleccionarMesa(1)">Mesa 1</button>
+      <button type="button" onclick="seleccionarMesa(2)">Mesa 2</button>
+      <button type="button" onclick="seleccionarMesa(3)">Mesa 3</button>
+      <button type="button" onclick="seleccionarMesa(4)">Mesa 4</button>
+    </div>
+
+    <p id="mesaSeleccionada" style="margin-top:10px; font-weight:bold;"></p>
+    <button class="btn-pedido" onclick="abrirPedido()">
+  Enviar Pedido
+</button>
+  </div>
+
 </div>
 
 <section class="galeria">
 <h2>Momentos en Yoyo's</h2>
 <div class="slider">
   <img src="img/momento1.jpeg">
-  <img src="img/momento2.jpeg">
   <img src="img/momento3.jpeg">
   <img src="img/momento4.jpeg">
   <img src="img/momento5.jpeg">
   <img src="img/momento6.jpeg">
   <img src="img/momento7.jpeg">
   <img src="img/momento8.jpeg">
+  <img src="img/momento9.jpeg">
+  <img src="img/momento10.jpeg">
+  <img src="img/momento11.jpeg">
+  <img src="img/momento12.jpeg">
+  <img src="img/momento13.jpeg">
 </div>
 </section>
 
 <div class="cart reserva" onclick="abrirReserva()">Reservar</div>
-<div class="cart pedido" onclick="abrirPedido()">Enviar Pedido</div>
 
 <footer>
 
@@ -422,6 +493,7 @@ let pedido={
   piqueos:[],
   platos:[]
 };
+let mesaSeleccionada = "";
 
 window.addEventListener("DOMContentLoaded", function() {
   document.getElementById("logoInicio").addEventListener("click", entrar);
@@ -464,16 +536,28 @@ function addLimonada(){
   alert("Limonada agregada");
 }
 
+function seleccionarMesa(numero){
+  mesaSeleccionada = numero;
+
+  document.getElementById("mesaSeleccionada").innerText =
+    "Mesa seleccionada: " + numero;
+
+  const botones = document.querySelectorAll("#mesas button");
+  botones.forEach(b => b.classList.remove("activa"));
+
+  botones[numero-1].classList.add("activa");
+}
+
 function abrirPedido(){
   const nombre=document.getElementById("nombre").value;
-  const mesa=document.getElementById("mesa").value;
+  const mesa = mesaSeleccionada;
 
   if(!nombre){ alert("Ingrese su nombre"); return; }
-  if(!mesa){ alert("Ingrese número de mesa"); return; }
+  if(!mesa){ alert("Seleccione una mesa"); return; }
 
-  let mensaje="YOYO PEDIDO\n\n";
-  mensaje+="Cliente: "+nombre+"\n";
-  mensaje+="Mesa: "+mesa+"\n\n";
+  let mensaje="*YOYO PEDIDO*\n\n";
+  mensaje+="*Cliente:* "+nombre+"\n";
+  mensaje+="*Mesa:* "+mesa+"\n\n";
 
   Object.keys(pedido).forEach(cat=>{
     if(pedido[cat].length>0){
@@ -482,6 +566,8 @@ function abrirPedido(){
       mensaje+="\n";
     }
   });
+
+  mensaje += "\n*¡Muchas Gracias :D!*";
 
   window.location.href="https://wa.me/"+phone+"?text="+encodeURIComponent(mensaje);
 }
@@ -497,10 +583,11 @@ function abrirReserva(){
   const hora = prompt("Hora de llegada (Ej: 8:30 PM):");
   if(!hora) return;
 
-  let mensaje="YOYO RESERVA\n\n";
-  mensaje+="Nombre: "+nombre+"\n";
-  mensaje+="Personas: "+personas+"\n";
-  mensaje+="Hora: "+hora;
+  let mensaje="*YOYO RESERVA*\n\n";
+  mensaje+="*Nombre:* "+nombre+"\n";
+  mensaje+="*Personas:* "+personas+"\n";
+  mensaje+="*Hora:* "+hora;
+  mensaje += "\n*¡Muchas Gracias :D!*";
 
   window.location.href="https://wa.me/"+phone+"?text="+encodeURIComponent(mensaje);
 }
@@ -539,7 +626,7 @@ load("piqueos",[
 load("platos",[
 {nombre:"Ceviche Simple",precio:12},
 {nombre:"Ceviche Mixto",precio:15},
-{nombre:"Arroz con Mariscos",precio:15},
+{nombre:"Arroz con Mariscos",precio:12},
 {nombre:"Chicharron de Pota",precio:12}
 ],"platos");
 
