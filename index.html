@@ -399,7 +399,7 @@ function abrirPedido() {
       msg += "\n";
     }
   });
-  msg += "¡Muchas gracias yoyo!";
+  msg += "¡Muchas gracias!";
 
   window.open(`https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`, "_blank");
 
@@ -418,7 +418,7 @@ function abrirReserva(e) {
   const hora = prompt("Hora aproximada de llegada (ej: 9:00 pm)");
   if (!hora) return;
 
-  const msg = `*RESERVA YOYO*\n\n*Nombre:* ${nom}\n*Personas:* ${pers}\n*Hora:* ${hora}\n\n¡Muchas Gracias Yoyo!`;
+  const msg = `*RESERVA YOYO*\n\n*Nombre:* ${nom}\n*Personas:* ${pers}\n*Hora:* ${hora}\n\n¡Muchas Gracias!`;
 
   window.open(`https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`, "_blank");
 }
