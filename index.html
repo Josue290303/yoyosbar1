@@ -309,6 +309,7 @@
     <input id="resNombre" type="text" placeholder="Nombre completo">
     <select id="resPersonas">
       <option value="">¿Cuántas personas?</option>
+      <option value="1">1 persona</option>
       <option value="2">2 personas</option>
       <option value="3">3 personas</option>
       <option value="4">4 personas</option>
@@ -373,7 +374,7 @@ function enviarReserva() {
   if (!pers) return showToast("Selecciona cuántas personas");
   if (!hora) return showToast("Ingresa la hora aproximada");
 
-  const msg = `*RESERVA YOYO*\n\n*Nombre:* ${nom}\n*Personas:* ${pers}\n*Hora:* ${hora}\n\n¡Muchas Gracias!`;
+  const msg = `*YOYO RESERVA*\n\n*Nombre:* ${nom}\n*Personas:* ${pers}\n*Hora:* ${hora}\n\n¡Muchas Gracias!`;
   window.open(`https://api.whatsapp.com/send?phone=${PHONE}&text=${encodeURIComponent(msg)}`, "_blank");
 
   cerrarModalReserva();
