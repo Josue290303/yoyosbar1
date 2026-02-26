@@ -6,7 +6,6 @@
   <title>Yoyo's Bar & Mar • Tarapoto</title>
   <link rel="icon" href="img/logoyoyo.jpeg">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-
   <style>
     :root {
       --gold: #d4b37a;
@@ -17,7 +16,6 @@
       --border: #e8dfcf;
       --radius: 14px;
     }
-
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
       font-family:'Inter', sans-serif;
@@ -35,7 +33,35 @@
       z-index:-1;
     }
 
-    /* SPLASH / PANTALLA INICIAL – sin footer */
+    /* ==================== TOAST ==================== */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold);
+      color: white;
+      padding: 16px 32px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1.12rem;
+      box-shadow: 0 15px 40px rgba(212,179,122,0.35);
+      z-index: 20000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      white-space: nowrap;
+    }
+    .toast.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(-20px);
+    }
+
+    /* ==================== RESTO DEL CSS (sin cambios) ==================== */
     #inicio {
       position:fixed;
       inset:0;
@@ -51,10 +77,7 @@
     }
     #inicio.hidden { opacity:0; visibility:hidden; }
     #inicio img.logo-big {
-      width:210px;
-      height:210px;
-      border-radius:50%;
-      object-fit:cover;
+      width:210px; height:210px; border-radius:50%; object-fit:cover;
       border:6px solid rgba(212,179,122,0.6);
       box-shadow:0 0 60px rgba(212,179,122,0.5);
       margin-bottom:1.8rem;
@@ -80,7 +103,6 @@
     .btn-reserva { background:transparent; color:var(--gold); border:3px solid var(--gold); }
     .btn-reserva:hover { background:var(--gold); color:white; transform:translateY(-3px); }
 
-    /* HEADER */
     header {
       position:sticky;
       top:0;
@@ -98,10 +120,8 @@
     }
     .logo-sm { width:56px; height:56px; border-radius:50%; object-fit:cover; border:3px solid var(--gold); }
 
-    /* CONTENIDO PRINCIPAL */
     #contenido { display:none; padding-bottom:3rem; }
 
-    /* SECCIONES MENÚ */
     .section {
       max-width:720px;
       margin:1.6rem auto;
@@ -146,23 +166,6 @@
     }
     .add-btn:hover { background:var(--gold-dark); transform:translateY(-2px); }
 
-    .jarra-item .controls {
-      display:flex;
-      align-items:center;
-      gap:0.7rem;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-    }
-    .jarra-item select {
-      padding:0.65rem 1rem;
-      border:1px solid var(--border);
-      border-radius:10px;
-      background:#fdfaf5;
-      font-size:0.97rem;
-      min-width:85px;
-    }
-
-    /* PEDIDO BOX */
     .pedido-box {
       max-width:620px;
       margin:2.5rem auto;
@@ -205,7 +208,6 @@
       color:white;
       transform:scale(1.08);
     }
-
     .btn-enviar-pedido {
       width:100%;
       padding:0.9rem;
@@ -224,13 +226,11 @@
       transform:translateY(-2px);
     }
 
-    /* GALERÍA */
     .galeria { padding:4rem 1rem 2rem; text-align:center; background:rgba(44,34,24,0.92); color:white; }
     .galeria h2 { font-family:'Playfair Display', serif; font-size:2.8rem; margin-bottom:2rem; }
     .slider { display:flex; gap:1.6rem; overflow-x:auto; padding:1rem 0; scroll-snap-type:x mandatory; }
     .slider img { width:310px; height:390px; object-fit:cover; border-radius:20px; scroll-snap-align:center; box-shadow:0 15px 40px rgba(0,0,0,0.4); }
 
-    /* FOOTER – solo en la carta */
     footer {
       text-align:center;
       padding:2rem 1rem 3rem;
@@ -238,23 +238,12 @@
       color:#6b5a45;
       opacity:0.75;
     }
-    footer a {
-      color:var(--gold);
-      text-decoration:none;
-      font-weight:500;
-    }
+    footer a { color:var(--gold); text-decoration:none; font-weight:500; }
     footer a:hover { text-decoration:underline; }
-
     .footer-logo {
-      width:60px;
-      height:60px;
-      border-radius:50%;
-      object-fit:cover;
-      margin:0 auto 1rem;
-      display:block;
-      border:2px solid var(--gold);
+      width:60px; height:60px; border-radius:50%; object-fit:cover;
+      margin:0 auto 1rem; display:block; border:2px solid var(--gold);
     }
-
     .redes-footer {
       display:flex;
       justify-content:center;
@@ -262,8 +251,7 @@
       margin:0.8rem 0 0.6rem;
     }
     .redes-footer img {
-      width:18px;
-      height:18px;
+      width:18px; height:18px;
       filter:brightness(0.7);
       transition:filter 0.3s;
     }
@@ -276,13 +264,11 @@
   <img src="img/logoyoyo.jpeg" class="logo-big" alt="Yoyo's Bar & Mar">
   <h1>Yoyo's Bar & Mar</h1>
   <p>Jr. San Pedro cuadra 10 • Tarapoto</p>
-
   <button class="btn-action btn-pedido" onclick="irACarta()">HACER PEDIDO</button>
   <button class="btn-action btn-reserva" onclick="abrirReserva(event)">RESERVAR MESA</button>
 </div>
 
 <div id="contenido">
-
   <header>
     <img src="img/logoyoyo.jpeg" class="logo-sm" alt="">
     Yoyo's Bar & Mar
@@ -295,9 +281,7 @@
 
   <div class="pedido-box">
     <h2 style="font-family:'Playfair Display',serif; font-size:1.9rem; margin-bottom:1rem;">Finaliza tu pedido</h2>
-    
     <input id="nombre" type="text" placeholder="Tu nombre completo">
-
     <p style="margin:1.5rem 0 1rem; font-weight:600;">Selecciona tu mesa</p>
     <div class="mesas" id="mesas">
       <button class="mesa-btn" onclick="seleccionarMesa(1)">1</button>
@@ -306,7 +290,6 @@
       <button class="mesa-btn" onclick="seleccionarMesa(4)">4</button>
     </div>
     <p id="mesaSeleccionada" style="font-weight:600; min-height:28px;"></p>
-
     <button class="btn-enviar-pedido" onclick="abrirPedido()">Enviar Pedido por WhatsApp</button>
   </div>
 
@@ -328,7 +311,6 @@
     </div>
   </section>
 
-  <!-- Footer SOLO en la carta -->
   <footer>
     <img src="img/logoyoyo.jpeg" class="footer-logo" alt="Yoyo's">
     <div class="redes-footer">
@@ -338,14 +320,42 @@
     </div>
     © 2026 Yoyo's Bar & Mar • Desarrollo y diseño por Josué Lopez <a href="https://instagram.com/blazemodejj" target="_blank">@blazemodejj</a>
   </footer>
-
 </div>
+
+<!-- TOAST -->
+<div id="toast" class="toast"></div>
 
 <script>
 const PHONE = "51927047053";
 let pedido = { cocktails:[], jarras:[], piqueos:[], platos:[] };
 let mesaSeleccionada = null;
 
+// ==================== TOAST ====================
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 3000);
+}
+
+// ==================== RESET A INICIO ====================
+function resetToInicio() {
+  pedido = { cocktails:[], jarras:[], piqueos:[], platos:[] };
+  mesaSeleccionada = null;
+
+  document.getElementById("nombre").value = "";
+  document.getElementById("mesaSeleccionada").innerHTML = "";
+  document.querySelectorAll(".mesa-btn").forEach(b => b.classList.remove("active"));
+
+  document.getElementById("contenido").style.display = "none";
+  const inicio = document.getElementById("inicio");
+  inicio.style.display = "flex";
+  inicio.classList.remove("hidden");
+}
+
+// ==================== FUNCIONES ====================
 function irACarta() {
   document.getElementById("inicio").classList.add("hidden");
   setTimeout(() => {
@@ -361,14 +371,14 @@ function toggle(el) {
 
 function add(cat, nombre, precio) {
   pedido[cat].push(`${nombre} — S/${precio}`);
-  alert(`${nombre} agregado ✓`);
+  showToast(`${nombre} agregado ✓`);
 }
 
 function addJarra(nombre, selectId) {
   const val = document.getElementById(selectId).value;
   const [size, price] = val.split("-");
   pedido.jarras.push(`${nombre} ${size} — S/${price}`);
-  alert(`${nombre} agregado ✓`);
+  showToast(`${nombre} ${size} agregado ✓`);
 }
 
 function addLimonada() {
@@ -376,7 +386,7 @@ function addLimonada() {
   const val = document.getElementById("limonada_size").value;
   const [size, price] = val.split("-");
   pedido.jarras.push(`Limonada ${tipo} ${size} — S/${price}`);
-  alert("Limonada agregada ✓");
+  showToast(`Limonada ${tipo} ${size} agregado ✓`);
 }
 
 function seleccionarMesa(n) {
@@ -388,8 +398,8 @@ function seleccionarMesa(n) {
 
 function abrirPedido() {
   const nombre = document.getElementById("nombre").value.trim();
-  if (!nombre) return alert("Ingresa tu nombre por favor");
-  if (!mesaSeleccionada) return alert("Selecciona una mesa");
+  if (!nombre) return showToast("Ingresa tu nombre por favor");
+  if (!mesaSeleccionada) return showToast("Selecciona una mesa");
 
   let msg = `*YOYO PEDIDO*\n\n*Cliente:* ${nombre}\n*Mesa:* ${mesaSeleccionada}\n\n`;
   Object.keys(pedido).forEach(cat => {
@@ -401,16 +411,14 @@ function abrirPedido() {
   });
   msg += "¡Muchas gracias!";
 
-  window.open(`https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`, "_blank");
+  window.open(`https://api.whatsapp.com/send?phone=${PHONE}&text=${encodeURIComponent(msg)}`, "_blank");
 
-  setTimeout(() => {
-    pedido = {cocktails:[], jarras:[], piqueos:[], platos:[]};
-  }, 1500);
+  // Volver automáticamente a la pantalla de inicio
+  setTimeout(resetToInicio, 700);
 }
 
 function abrirReserva(e) {
   e.stopPropagation();
-
   const nom = prompt("¿A nombre de quién es la reserva?");
   if (!nom) return;
   const pers = prompt("¿Cuántas personas serán?");
@@ -419,8 +427,7 @@ function abrirReserva(e) {
   if (!hora) return;
 
   const msg = `*RESERVA YOYO*\n\n*Nombre:* ${nom}\n*Personas:* ${pers}\n*Hora:* ${hora}\n\n¡Muchas Gracias!`;
-
-  window.open(`https://wa.me/${PHONE}?text=${encodeURIComponent(msg)}`, "_blank");
+  window.open(`https://api.whatsapp.com/send?phone=${PHONE}&text=${encodeURIComponent(msg)}`, "_blank");
 }
 
 function load(id, arr, cat) {
@@ -448,7 +455,6 @@ load("cocktails", [
 ],"cocktails");
 
 load("piqueos", [{nombre:"Chifle",precio:3},{nombre:"Canchita",precio:3}],"piqueos");
-
 load("platos", [
   {nombre:"Ceviche Simple",precio:12},{nombre:"Ceviche Mixto",precio:15},
   {nombre:"Arroz con Mariscos",precio:12},{nombre:"Chicharrón de Pota",precio:12}
@@ -488,15 +494,19 @@ document.getElementById("jarras").innerHTML = `
   </div>
 </div>`;
 
-// Entrar desde clic en logo (solo si no es en botones)
-function entrar(e) {
-  if (e.target.tagName !== 'BUTTON') {
-    irACarta();
+// ==================== LISTENERS ====================
+window.addEventListener("load", resetToInicio);
+
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "visible") {
+    resetToInicio();
   }
-}
+});
 
 window.addEventListener("DOMContentLoaded", () => {
-  document.getElementById("inicio").addEventListener("click", entrar);
+  document.getElementById("inicio").addEventListener("click", (e) => {
+    if (e.target.tagName !== 'BUTTON') irACarta();
+  });
 });
 </script>
 </body>
