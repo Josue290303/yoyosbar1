@@ -61,19 +61,75 @@
       transform: translateX(-50%) translateY(-20px);
     }
 
-    /* ==================== RESTO DEL CSS (sin cambios) ==================== */
+    /* ==================== MODAL RESERVA ==================== */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 30000;
+    }
+    .modal-content {
+      background: white;
+      width: 92%;
+      max-width: 380px;
+      border-radius: 24px;
+      padding: 2rem 1.8rem;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      text-align: center;
+    }
+    .modal h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.1rem;
+      color: var(--dark);
+      margin-bottom: 1.8rem;
+    }
+    .modal input, .modal select {
+      width: 100%;
+      padding: 1rem;
+      margin: 0.8rem 0;
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      font-size: 1.1rem;
+      text-align: center;
+    }
+    .modal .btn-group {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .modal button {
+      flex: 1;
+      padding: 1rem;
+      border: none;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .modal .btn-cancel {
+      background: #eee;
+      color: #555;
+    }
+    .modal .btn-reservar {
+      background: var(--gold);
+      color: white;
+    }
+    .modal .btn-reservar:hover {
+      background: var(--gold-dark);
+      transform: translateY(-3px);
+    }
+
+    /* ==================== RESTO DEL DISEÑO (sin cambios) ==================== */
     #inicio {
-      position:fixed;
-      inset:0;
-      z-index:9999;
+      position:fixed; inset:0; z-index:9999;
       background: linear-gradient(rgba(0,0,0,0.78), rgba(0,0,0,0.88)), url("img/fondo.jpeg") center/cover;
       color:white;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      padding:2rem 1rem;
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      text-align:center; padding:2rem 1rem;
     }
     #inicio.hidden { opacity:0; visibility:hidden; }
     #inicio img.logo-big {
@@ -82,21 +138,10 @@
       box-shadow:0 0 60px rgba(212,179,122,0.5);
       margin-bottom:1.8rem;
     }
-    #inicio h1 {
-      font-family:'Playfair Display', serif;
-      font-size:clamp(2.8rem, 9vw, 5.2rem);
-      margin-bottom:0.8rem;
-    }
+    #inicio h1 { font-family:'Playfair Display', serif; font-size:clamp(2.8rem, 9vw, 5.2rem); margin-bottom:0.8rem; }
     .btn-action {
-      margin:1rem;
-      padding:1.1rem 2.8rem;
-      font-size:1.25rem;
-      font-weight:600;
-      border:none;
-      border-radius:50px;
-      cursor:pointer;
-      transition:all 0.3s ease;
-      min-width:240px;
+      margin:1rem; padding:1.1rem 2.8rem; font-size:1.25rem; font-weight:600;
+      border:none; border-radius:50px; cursor:pointer; transition:all 0.3s ease; min-width:240px;
     }
     .btn-pedido { background:var(--gold); color:white; }
     .btn-pedido:hover { background:var(--gold-dark); transform:translateY(-3px); }
@@ -104,127 +149,67 @@
     .btn-reserva:hover { background:var(--gold); color:white; transform:translateY(-3px); }
 
     header {
-      position:sticky;
-      top:0;
-      z-index:100;
-      background:rgba(44,34,24,0.95);
-      backdrop-filter:blur(12px);
-      color:white;
-      padding:1.1rem 1rem;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:1rem;
-      font-size:1.6rem;
-      font-weight:600;
+      position:sticky; top:0; z-index:100;
+      background:rgba(44,34,24,0.95); backdrop-filter:blur(12px);
+      color:white; padding:1.1rem 1rem;
+      display:flex; align-items:center; justify-content:center; gap:1rem;
+      font-size:1.6rem; font-weight:600;
     }
     .logo-sm { width:56px; height:56px; border-radius:50%; object-fit:cover; border:3px solid var(--gold); }
 
     #contenido { display:none; padding-bottom:3rem; }
 
     .section {
-      max-width:720px;
-      margin:1.6rem auto;
-      background:white;
-      border-radius:var(--radius);
-      overflow:hidden;
+      max-width:720px; margin:1.6rem auto; background:white;
+      border-radius:var(--radius); overflow:hidden;
       box-shadow:0 10px 30px rgba(0,0,0,0.12);
     }
     .section h2 {
-      padding:1.3rem;
-      background:linear-gradient(135deg, #f8f4ee, #f0e9dd);
-      font-family:'Playfair Display', serif;
-      font-size:1.8rem;
-      text-align:center;
-      cursor:pointer;
+      padding:1.3rem; background:linear-gradient(135deg, #f8f4ee, #f0e9dd);
+      font-family:'Playfair Display', serif; font-size:1.8rem;
+      text-align:center; cursor:pointer;
     }
     .content { padding:1.5rem 1.8rem; display:none; }
     .content.active { display:block; }
 
     .menu-item, .jarra-item {
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:1.2rem 0;
-      border-bottom:1px solid var(--border);
-      gap:1rem;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:1.2rem 0; border-bottom:1px solid var(--border); gap:1rem;
     }
-    .menu-item:last-child, .jarra-item:last-child { border:none; }
     .left { flex:1; }
     .name { font-size:1.14rem; font-weight:600; }
     .price { color:var(--gold-dark); font-weight:700; font-size:1.16rem; }
     .add-btn {
-      background:var(--gold);
-      color:white;
-      border:none;
-      padding:0.7rem 1.5rem;
-      border-radius:50px;
-      font-weight:600;
-      cursor:pointer;
-      min-width:105px;
-      transition:all 0.25s;
+      background:var(--gold); color:white; border:none;
+      padding:0.7rem 1.5rem; border-radius:50px; font-weight:600;
+      cursor:pointer; min-width:105px; transition:all 0.25s;
     }
     .add-btn:hover { background:var(--gold-dark); transform:translateY(-2px); }
 
     .pedido-box {
-      max-width:620px;
-      margin:2.5rem auto;
-      padding:2rem;
-      background:white;
-      border-radius:var(--radius);
-      box-shadow:0 10px 30px rgba(0,0,0,0.12);
-      text-align:center;
+      max-width:620px; margin:2.5rem auto; padding:2rem;
+      background:white; border-radius:var(--radius);
+      box-shadow:0 10px 30px rgba(0,0,0,0.12); text-align:center;
     }
     .pedido-box input {
-      width:100%;
-      padding:1rem;
-      font-size:1.1rem;
-      border:2px solid var(--border);
-      border-radius:12px;
-      text-align:center;
-      margin:1rem 0;
+      width:100%; padding:1rem; font-size:1.1rem;
+      border:2px solid var(--border); border-radius:12px;
+      text-align:center; margin:1rem 0;
     }
-    .mesas {
-      display:flex;
-      justify-content:center;
-      gap:1.1rem;
-      flex-wrap:wrap;
-      margin:1.5rem 0;
-    }
+    .mesas { display:flex; justify-content:center; gap:1.1rem; flex-wrap:wrap; margin:1.5rem 0; }
     .mesa-btn {
-      width:78px;
-      height:78px;
-      border-radius:50%;
-      background:white;
-      border:4px solid var(--gold);
-      color:var(--dark);
-      font-size:1.7rem;
-      font-weight:700;
-      cursor:pointer;
-      transition:all 0.3s;
+      width:78px; height:78px; border-radius:50%; background:white;
+      border:4px solid var(--gold); color:var(--dark);
+      font-size:1.7rem; font-weight:700; cursor:pointer; transition:all 0.3s;
     }
-    .mesa-btn.active {
-      background:var(--gold);
-      color:white;
-      transform:scale(1.08);
-    }
+    .mesa-btn.active { background:var(--gold); color:white; transform:scale(1.08); }
+
     .btn-enviar-pedido {
-      width:100%;
-      padding:0.9rem;
-      background:var(--gold);
-      color:white;
-      border:none;
-      border-radius:50px;
-      font-size:1.18rem;
-      font-weight:600;
-      cursor:pointer;
-      margin-top:1.5rem;
-      transition:all 0.25s;
+      width:100%; padding:0.9rem; background:var(--gold); color:white;
+      border:none; border-radius:50px; font-size:1.18rem;
+      font-weight:600; cursor:pointer; margin-top:1.5rem;
     }
-    .btn-enviar-pedido:hover {
-      background:var(--gold-dark);
-      transform:translateY(-2px);
-    }
+    .btn-enviar-pedido:hover { background:var(--gold-dark); transform:translateY(-2px); }
 
     .galeria { padding:4rem 1rem 2rem; text-align:center; background:rgba(44,34,24,0.92); color:white; }
     .galeria h2 { font-family:'Playfair Display', serif; font-size:2.8rem; margin-bottom:2rem; }
@@ -232,28 +217,19 @@
     .slider img { width:310px; height:390px; object-fit:cover; border-radius:20px; scroll-snap-align:center; box-shadow:0 15px 40px rgba(0,0,0,0.4); }
 
     footer {
-      text-align:center;
-      padding:2rem 1rem 3rem;
-      font-size:0.82rem;
-      color:#6b5a45;
-      opacity:0.75;
+      text-align:center; padding:2rem 1rem 3rem;
+      font-size:0.82rem; color:#6b5a45; opacity:0.75;
     }
     footer a { color:var(--gold); text-decoration:none; font-weight:500; }
-    footer a:hover { text-decoration:underline; }
     .footer-logo {
       width:60px; height:60px; border-radius:50%; object-fit:cover;
       margin:0 auto 1rem; display:block; border:2px solid var(--gold);
     }
     .redes-footer {
-      display:flex;
-      justify-content:center;
-      gap:1.2rem;
-      margin:0.8rem 0 0.6rem;
+      display:flex; justify-content:center; gap:1.2rem; margin:0.8rem 0 0.6rem;
     }
     .redes-footer img {
-      width:18px; height:18px;
-      filter:brightness(0.7);
-      transition:filter 0.3s;
+      width:18px; height:18px; filter:brightness(0.7); transition:filter 0.3s;
     }
     .redes-footer img:hover { filter:brightness(1); }
   </style>
@@ -265,10 +241,11 @@
   <h1>Yoyo's Bar & Mar</h1>
   <p>Jr. San Pedro cuadra 10 • Tarapoto</p>
   <button class="btn-action btn-pedido" onclick="irACarta()">HACER PEDIDO</button>
-  <button class="btn-action btn-reserva" onclick="abrirReserva(event)">RESERVAR MESA</button>
+  <button class="btn-action btn-reserva" onclick="abrirModalReserva()">RESERVAR MESA</button>
 </div>
 
 <div id="contenido">
+  <!-- ... todo el contenido anterior igual ... -->
   <header>
     <img src="img/logoyoyo.jpeg" class="logo-sm" alt="">
     Yoyo's Bar & Mar
@@ -325,6 +302,30 @@
 <!-- TOAST -->
 <div id="toast" class="toast"></div>
 
+<!-- MODAL RESERVA -->
+<div id="modalReserva" class="modal">
+  <div class="modal-content">
+    <h2>Reserva tu mesa</h2>
+    <input id="resNombre" type="text" placeholder="Nombre completo">
+    <select id="resPersonas">
+      <option value="">¿Cuántas personas?</option>
+      <option value="2">2 personas</option>
+      <option value="3">3 personas</option>
+      <option value="4">4 personas</option>
+      <option value="5">5 personas</option>
+      <option value="6">6 personas</option>
+      <option value="7">7 personas</option>
+      <option value="8">8+ personas</option>
+    </select>
+    <input id="resHora" type="text" placeholder="Hora aproximada (ej: 9:00 pm)">
+    
+    <div class="btn-group">
+      <button class="btn-cancel" onclick="cerrarModalReserva()">Cancelar</button>
+      <button class="btn-reservar" onclick="enviarReserva()">Reservar ahora</button>
+    </div>
+  </div>
+</div>
+
 <script>
 const PHONE = "51927047053";
 let pedido = { cocktails:[], jarras:[], piqueos:[], platos:[] };
@@ -335,16 +336,13 @@ function showToast(msg) {
   const toast = document.getElementById('toast');
   toast.textContent = msg;
   toast.classList.add('show');
-  setTimeout(() => {
-    toast.classList.remove('show');
-  }, 3000);
+  setTimeout(() => toast.classList.remove('show'), 3000);
 }
 
-// ==================== RESET A INICIO ====================
+// ==================== RESET ====================
 function resetToInicio() {
   pedido = { cocktails:[], jarras:[], piqueos:[], platos:[] };
   mesaSeleccionada = null;
-
   document.getElementById("nombre").value = "";
   document.getElementById("mesaSeleccionada").innerHTML = "";
   document.querySelectorAll(".mesa-btn").forEach(b => b.classList.remove("active"));
@@ -355,7 +353,34 @@ function resetToInicio() {
   inicio.classList.remove("hidden");
 }
 
-// ==================== FUNCIONES ====================
+// ==================== MODAL RESERVA ====================
+function abrirModalReserva() {
+  document.getElementById("modalReserva").style.display = "flex";
+  document.getElementById("resNombre").focus();
+}
+function cerrarModalReserva() {
+  document.getElementById("modalReserva").style.display = "none";
+  document.getElementById("resNombre").value = "";
+  document.getElementById("resPersonas").value = "";
+  document.getElementById("resHora").value = "";
+}
+function enviarReserva() {
+  const nom = document.getElementById("resNombre").value.trim();
+  const pers = document.getElementById("resPersonas").value;
+  const hora = document.getElementById("resHora").value.trim();
+
+  if (!nom) return showToast("Ingresa tu nombre");
+  if (!pers) return showToast("Selecciona cuántas personas");
+  if (!hora) return showToast("Ingresa la hora aproximada");
+
+  const msg = `*RESERVA YOYO*\n\n*Nombre:* ${nom}\n*Personas:* ${pers}\n*Hora:* ${hora}\n\n¡Muchas Gracias!`;
+  window.open(`https://api.whatsapp.com/send?phone=${PHONE}&text=${encodeURIComponent(msg)}`, "_blank");
+
+  cerrarModalReserva();
+  showToast("Reserva enviada ✓");
+}
+
+// ==================== PEDIDO ====================
 function irACarta() {
   document.getElementById("inicio").classList.add("hidden");
   setTimeout(() => {
@@ -365,8 +390,7 @@ function irACarta() {
 }
 
 function toggle(el) {
-  const content = el.nextElementSibling;
-  content.classList.toggle("active");
+  el.nextElementSibling.classList.toggle("active");
 }
 
 function add(cat, nombre, precio) {
@@ -412,24 +436,10 @@ function abrirPedido() {
   msg += "¡Muchas gracias!";
 
   window.open(`https://api.whatsapp.com/send?phone=${PHONE}&text=${encodeURIComponent(msg)}`, "_blank");
-
-  // Volver automáticamente a la pantalla de inicio
   setTimeout(resetToInicio, 700);
 }
 
-function abrirReserva(e) {
-  e.stopPropagation();
-  const nom = prompt("¿A nombre de quién es la reserva?");
-  if (!nom) return;
-  const pers = prompt("¿Cuántas personas serán?");
-  if (!pers) return;
-  const hora = prompt("Hora aproximada de llegada (ej: 9:00 pm)");
-  if (!hora) return;
-
-  const msg = `*RESERVA YOYO*\n\n*Nombre:* ${nom}\n*Personas:* ${pers}\n*Hora:* ${hora}\n\n¡Muchas Gracias!`;
-  window.open(`https://api.whatsapp.com/send?phone=${PHONE}&text=${encodeURIComponent(msg)}`, "_blank");
-}
-
+// ==================== CARGA DE MENÚ ====================
 function load(id, arr, cat) {
   const c = document.getElementById(id);
   arr.forEach(i => {
@@ -444,7 +454,6 @@ function load(id, arr, cat) {
   });
 }
 
-// Cargar carta
 load("cocktails", [
   {nombre:"Cuba Libre",precio:8},{nombre:"Chilcano de Pisco",precio:10},
   {nombre:"Daiquiri",precio:10},{nombre:"Pisco Sour",precio:10},
@@ -460,33 +469,23 @@ load("platos", [
   {nombre:"Arroz con Mariscos",precio:12},{nombre:"Chicharrón de Pota",precio:12}
 ],"platos");
 
-// Jarras
 document.getElementById("jarras").innerHTML = `
 <div class="jarra-item">
-  <div class="left">
-    <div class="name">Maracuyachado</div>
-    <div class="price">1L S/24 • ½L S/12</div>
-  </div>
+  <div class="left"><div class="name">Maracuyachado</div><div class="price">1L S/24 • ½L S/12</div></div>
   <div class="controls">
     <select id="maracuyachado_size"><option value="1L-24">1L</option><option value="1/2L-12">½L</option></select>
     <button class="add-btn" onclick="addJarra('Maracuyachado','maracuyachado_size')">Agregar</button>
   </div>
 </div>
 <div class="jarra-item">
-  <div class="left">
-    <div class="name">Maracumango</div>
-    <div class="price">1L S/24 • ½L S/12</div>
-  </div>
+  <div class="left"><div class="name">Maracumango</div><div class="price">1L S/24 • ½L S/12</div></div>
   <div class="controls">
     <select id="maracumango_size"><option value="1L-24">1L</option><option value="1/2L-12">½L</option></select>
     <button class="add-btn" onclick="addJarra('Maracumango','maracumango_size')">Agregar</button>
   </div>
 </div>
 <div class="jarra-item">
-  <div class="left">
-    <div class="name">Limonada</div>
-    <div class="price">1L S/16 • ½L S/8</div>
-  </div>
+  <div class="left"><div class="name">Limonada</div><div class="price">1L S/16 • ½L S/8</div></div>
   <div class="controls">
     <select id="limonada_tipo"><option>Clásica</option><option>Hierba Luisa</option><option>Frozen</option></select>
     <select id="limonada_size"><option value="1L-16">1L</option><option value="1/2L-8">½L</option></select>
@@ -494,13 +493,11 @@ document.getElementById("jarras").innerHTML = `
   </div>
 </div>`;
 
-// ==================== LISTENERS ====================
+// ==================== INICIO ====================
 window.addEventListener("load", resetToInicio);
 
 document.addEventListener("visibilitychange", () => {
-  if (document.visibilityState === "visible") {
-    resetToInicio();
-  }
+  if (document.visibilityState === "visible") resetToInicio();
 });
 
 window.addEventListener("DOMContentLoaded", () => {
