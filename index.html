@@ -15,6 +15,7 @@
       --text: #3c2f22;
       --border: #e8dfcf;
       --radius: 14px;
+      --red: #e74c3c;
     }
     * { margin:0; padding:0; box-sizing:border-box; }
     body {
@@ -32,8 +33,6 @@
                   url("img/fondo.jpeg") center/cover fixed;
       z-index:-1;
     }
-
-    /* ==================== TOAST ==================== */
     .toast {
       position: fixed;
       bottom: 30px;
@@ -41,27 +40,21 @@
       transform: translateX(-50%);
       background: var(--gold);
       color: white;
-      padding: 16px 32px;
+      padding: 14px 28px;
       border-radius: 50px;
       font-weight: 600;
-      font-size: 1.12rem;
-      box-shadow: 0 15px 40px rgba(212,179,122,0.35);
+      font-size: 1.05rem;
+      box-shadow: 0 12px 35px rgba(212,179,122,0.4);
       z-index: 20000;
       opacity: 0;
       visibility: hidden;
-      transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      white-space: nowrap;
+      transition: all 0.4s ease;
     }
     .toast.show {
       opacity: 1;
       visibility: visible;
-      transform: translateX(-50%) translateY(-20px);
+      transform: translateX(-50%) translateY(-10px);
     }
-
-    /* ==================== MODAL RESERVA ==================== */
     .modal {
       position: fixed;
       inset: 0;
@@ -70,43 +63,46 @@
       align-items: center;
       justify-content: center;
       z-index: 30000;
+      padding: 1rem;
     }
     .modal-content {
       background: white;
-      width: 92%;
-      max-width: 380px;
-      border-radius: 24px;
-      padding: 2rem 1.8rem;
+      width: 100%;
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: var(--radius);
+      padding: 1.8rem 1.4rem;
       box-shadow: 0 20px 60px rgba(0,0,0,0.3);
       text-align: center;
+      overflow-y: auto;
     }
     .modal h2 {
       font-family: 'Playfair Display', serif;
-      font-size: 2.1rem;
+      font-size: 1.9rem;
       color: var(--dark);
-      margin-bottom: 1.8rem;
+      margin-bottom: 1rem;
     }
     .modal input, .modal select {
       width: 100%;
-      padding: 1rem;
-      margin: 0.8rem 0;
+      padding: 0.9rem;
+      margin: 0.7rem 0;
       border: 2px solid var(--border);
-      border-radius: 14px;
-      font-size: 1.1rem;
+      border-radius: 12px;
+      font-size: 1rem;
       text-align: center;
     }
     .modal .btn-group {
       display: flex;
       gap: 1rem;
-      margin-top: 2rem;
+      margin-top: 1.8rem;
     }
     .modal button {
       flex: 1;
-      padding: 1rem;
+      padding: 0.9rem;
       border: none;
       border-radius: 50px;
       font-weight: 600;
-      font-size: 1.1rem;
+      font-size: 1rem;
       cursor: pointer;
       transition: all 0.3s;
     }
@@ -120,10 +116,131 @@
     }
     .modal .btn-reservar:hover {
       background: var(--gold-dark);
-      transform: translateY(-3px);
+      transform: translateY(-2px);
     }
-
-    /* ==================== RESTO DEL DISEÑO (sin cambios) ==================== */
+    .combo-section {
+      margin: 1.2rem 0;
+    }
+    .combo-list {
+      max-height: 200px;
+      overflow-y: auto;
+      padding: 0.6rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    .menu-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--border);
+      gap: 1rem;
+    }
+    .left {
+      flex: 1;
+      min-width: 0;
+    }
+    .name {
+      font-size: 1.05rem;
+      font-weight: 600;
+      word-break: break-word;
+    }
+    .price {
+      color: var(--gold-dark);
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+    .add-btn {
+      background: var(--gold);
+      color: white;
+      border: none;
+      padding: 0.6rem 1.3rem;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      min-width: 95px;
+      transition: all 0.25s;
+    }
+    .add-btn:hover {
+      background: var(--gold-dark);
+      transform: translateY(-2px);
+    }
+    .combo-added {
+      margin-top: 1.2rem;
+      padding: 1.2rem;
+      background: var(--cream);
+      border-radius: var(--radius);
+    }
+    .combo-added p {
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+      font-size: 1.05rem;
+    }
+    .combo-added ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .combo-added li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.7rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 1rem;
+    }
+    .combo-added li:last-child {
+      border-bottom: none;
+    }
+    .remove-btn {
+      background: var(--red);
+      color: white;
+      border: none;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      font-size: 0.9rem;
+      line-height: 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 0.8rem;
+    }
+    .remove-btn:hover {
+      background: #c0392b;
+      transform: scale(1.1);
+    }
+    @media (min-width: 768px) {
+      .modal-content {
+        max-width: 580px;
+        padding: 2rem;
+      }
+      .modal h2 {
+        font-size: 2.1rem;
+      }
+    }
+    @media (max-width: 480px) {
+      .modal-content {
+        padding: 1.2rem;
+      }
+      .menu-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.6rem;
+      }
+      .add-btn {
+        width: 100%;
+      }
+      .remove-btn {
+        margin-left: 0;
+        margin-top: 0.5rem;
+      }
+    }
+    /* ==================== RESTO DEL DISEÑO ==================== */
     #inicio {
       position:fixed; inset:0; z-index:9999;
       background: linear-gradient(rgba(0,0,0,0.78), rgba(0,0,0,0.88)), url("img/fondo.jpeg") center/cover;
@@ -147,7 +264,6 @@
     .btn-pedido:hover { background:var(--gold-dark); transform:translateY(-3px); }
     .btn-reserva { background:transparent; color:var(--gold); border:3px solid var(--gold); }
     .btn-reserva:hover { background:var(--gold); color:white; transform:translateY(-3px); }
-
     header {
       position:sticky; top:0; z-index:100;
       background:rgba(44,34,24,0.95); backdrop-filter:blur(12px);
@@ -156,9 +272,7 @@
       font-size:1.6rem; font-weight:600;
     }
     .logo-sm { width:56px; height:56px; border-radius:50%; object-fit:cover; border:3px solid var(--gold); }
-
     #contenido { display:none; padding-bottom:3rem; }
-
     .section {
       max-width:720px; margin:1.6rem auto; background:white;
       border-radius:var(--radius); overflow:hidden;
@@ -171,7 +285,6 @@
     }
     .content { padding:1.5rem 1.8rem; display:none; }
     .content.active { display:block; }
-
     .menu-item, .jarra-item {
       display:flex; align-items:center; justify-content:space-between;
       padding:1.2rem 0; border-bottom:1px solid var(--border); gap:1rem;
@@ -185,7 +298,6 @@
       cursor:pointer; min-width:105px; transition:all 0.25s;
     }
     .add-btn:hover { background:var(--gold-dark); transform:translateY(-2px); }
-
     .pedido-box {
       max-width:620px; margin:2.5rem auto; padding:2rem;
       background:white; border-radius:var(--radius);
@@ -203,19 +315,16 @@
       font-size:1.7rem; font-weight:700; cursor:pointer; transition:all 0.3s;
     }
     .mesa-btn.active { background:var(--gold); color:white; transform:scale(1.08); }
-
     .btn-enviar-pedido {
       width:100%; padding:0.9rem; background:var(--gold); color:white;
       border:none; border-radius:50px; font-size:1.18rem;
       font-weight:600; cursor:pointer; margin-top:1.5rem;
     }
     .btn-enviar-pedido:hover { background:var(--gold-dark); transform:translateY(-2px); }
-
     .galeria { padding:4rem 1rem 2rem; text-align:center; background:rgba(44,34,24,0.92); color:white; }
     .galeria h2 { font-family:'Playfair Display', serif; font-size:2.8rem; margin-bottom:2rem; }
     .slider { display:flex; gap:1.6rem; overflow-x:auto; padding:1rem 0; scroll-snap-type:x mandatory; }
     .slider img { width:310px; height:390px; object-fit:cover; border-radius:20px; scroll-snap-align:center; box-shadow:0 15px 40px rgba(0,0,0,0.4); }
-
     footer {
       text-align:center; padding:2rem 1rem 3rem;
       font-size:0.82rem; color:#6b5a45; opacity:0.75;
@@ -235,27 +344,23 @@
   </style>
 </head>
 <body>
-
 <div id="inicio">
   <img src="img/logoyoyo.jpeg" class="logo-big" alt="Yoyo's Bar & Mar">
   <h1>Yoyo's Bar & Mar</h1>
   <p>Jr. San Pedro cuadra 10 • Tarapoto</p>
   <button class="btn-action btn-pedido" onclick="irACarta()">HACER PEDIDO</button>
   <button class="btn-action btn-reserva" onclick="abrirModalReserva()">RESERVAR MESA</button>
+  <button class="btn-action btn-delivery" onclick="abrirModalCombo()">PEDIDO DELIVERY</button>
 </div>
-
 <div id="contenido">
-  <!-- ... todo el contenido anterior igual ... -->
   <header>
     <img src="img/logoyoyo.jpeg" class="logo-sm" alt="">
     Yoyo's Bar & Mar
   </header>
-
   <div class="section"><h2 onclick="toggle(this)">Cocktails</h2><div class="content" id="cocktails"></div></div>
   <div class="section"><h2 onclick="toggle(this)">Jarras</h2><div class="content" id="jarras"></div></div>
   <div class="section"><h2 onclick="toggle(this)">Piqueos</h2><div class="content" id="piqueos"></div></div>
   <div class="section"><h2 onclick="toggle(this)">Platos</h2><div class="content" id="platos"></div></div>
-
   <div class="pedido-box">
     <h2 style="font-family:'Playfair Display',serif; font-size:1.9rem; margin-bottom:1rem;">Finaliza tu pedido</h2>
     <input id="nombre" type="text" placeholder="Tu nombre completo">
@@ -269,7 +374,6 @@
     <p id="mesaSeleccionada" style="font-weight:600; min-height:28px;"></p>
     <button class="btn-enviar-pedido" onclick="abrirPedido()">Enviar Pedido por WhatsApp</button>
   </div>
-
   <section class="galeria">
     <h2>Momentos en Yoyo's</h2>
     <div class="slider">
@@ -287,7 +391,6 @@
       <img src="img/momento13.jpeg" loading="lazy" alt="">
     </div>
   </section>
-
   <footer>
     <img src="img/logoyoyo.jpeg" class="footer-logo" alt="Yoyo's">
     <div class="redes-footer">
@@ -298,10 +401,8 @@
     © 2026 Yoyo's Bar & Mar • Desarrollo y diseño por Josué Lopez <a href="https://instagram.com/blazemodejj" target="_blank">@blazemodejj</a>
   </footer>
 </div>
-
 <!-- TOAST -->
 <div id="toast" class="toast"></div>
-
 <!-- MODAL RESERVA -->
 <div id="modalReserva" class="modal">
   <div class="modal-content">
@@ -319,18 +420,67 @@
       <option value="8">8+ personas</option>
     </select>
     <input id="resHora" type="text" placeholder="Hora aproximada (ej: 9:00 pm)">
-    
     <div class="btn-group">
       <button class="btn-cancel" onclick="cerrarModalReserva()">Cancelar</button>
       <button class="btn-reservar" onclick="enviarReserva()">Reservar ahora</button>
     </div>
   </div>
 </div>
-
+<!-- MODAL COMBO DELIVERY -->
+<div id="modalCombo" class="modal">
+  <div class="modal-content">
+    <h2>¡Yoyo Combo Delivery!</h2>
+    <p style="margin-bottom:1rem; font-size:1.1rem; color:var(--text);">Elige tus platos favoritos + bebidas refrescantes y te lo llevamos a casa. ¡Incluye delivery!</p>
+    <input id="combo_nombre" type="text" placeholder="Nombre completo">
+    <div class="combo-section">
+      <p style="margin:1rem 0 0.5rem; font-weight:600;">Selecciona platos</p>
+      <div class="combo-list" id="combo_platos_list"></div>
+      <div class="combo-added" id="combo_added_platos">
+        <p>Platos agregados:</p>
+        <ul></ul>
+      </div>
+    </div>
+    <div class="combo-section">
+      <p style="margin:1rem 0 0.5rem; font-weight:600;">Selecciona bebidas</p>
+      <div class="combo-list" id="combo_bebidas_list"></div>
+      <div class="combo-added" id="combo_added_bebidas">
+        <p>Bebidas agregadas:</p>
+        <ul></ul>
+      </div>
+    </div>
+    <select id="combo_zona">
+      <option value="">Selecciona zona de delivery</option>
+      <option value="Banda-4">Banda - S/4</option>
+      <option value="Huayco-4">Huayco - S/4</option>
+      <option value="Tarapoto-3">Tarapoto - S/3</option>
+      <option value="Morales-5">Morales - S/5</option>
+    </select>
+    <input id="combo_direccion" type="text" placeholder="Dirección completa (ej: Jr. Example 123)">
+    <div class="btn-group">
+      <button class="btn-cancel" onclick="cerrarModalCombo()">Cancelar</button>
+      <button class="btn-reservar" onclick="guardarCombo()">Guardar Pedido</button>
+    </div>
+  </div>
+</div>
+<!-- MODAL CONFIRMACION -->
+<div id="modalConfirmacion" class="modal">
+  <div class="modal-content">
+    <h2>¡Muchas gracias por hacer tu pedido!</h2>
+    <p id="confirmacion_total" style="margin: 1rem 0; font-size:1.3rem; font-weight:700; color:var(--gold-dark);"></p>
+    <p style="margin-bottom:1rem; font-size:1.1rem;">¿Con cuánto vas a cancelar?</p>
+    <input id="pago_cliente" type="number" placeholder="Ej: 50" min="0" step="0.01">
+    <div class="btn-group" style="margin-top:1.8rem;">
+      <button class="btn-cancel" onclick="cerrarModalConfirmacion()">Cancelar</button>
+      <button class="btn-reservar" onclick="enviarComboConfirmado()">Enviar Pedido</button>
+    </div>
+  </div>
+</div>
 <script>
 const PHONE = "51927047053";
 let pedido = { cocktails:[], jarras:[], piqueos:[], platos:[] };
 let mesaSeleccionada = null;
+let comboData = { platos: [], bebidas: [], zona: null, nombre: '', direccion: '' };
+let totalCalculado = 0;
 
 // ==================== TOAST ====================
 function showToast(msg) {
@@ -339,7 +489,6 @@ function showToast(msg) {
   toast.classList.add('show');
   setTimeout(() => toast.classList.remove('show'), 3000);
 }
-
 // ==================== RESET ====================
 function resetToInicio() {
   pedido = { cocktails:[], jarras:[], piqueos:[], platos:[] };
@@ -347,13 +496,11 @@ function resetToInicio() {
   document.getElementById("nombre").value = "";
   document.getElementById("mesaSeleccionada").innerHTML = "";
   document.querySelectorAll(".mesa-btn").forEach(b => b.classList.remove("active"));
-
   document.getElementById("contenido").style.display = "none";
   const inicio = document.getElementById("inicio");
   inicio.style.display = "flex";
   inicio.classList.remove("hidden");
 }
-
 // ==================== MODAL RESERVA ====================
 function abrirModalReserva() {
   document.getElementById("modalReserva").style.display = "flex";
@@ -369,18 +516,114 @@ function enviarReserva() {
   const nom = document.getElementById("resNombre").value.trim();
   const pers = document.getElementById("resPersonas").value;
   const hora = document.getElementById("resHora").value.trim();
-
   if (!nom) return showToast("Ingresa tu nombre");
   if (!pers) return showToast("Selecciona cuántas personas");
   if (!hora) return showToast("Ingresa la hora aproximada");
-
   const msg = `*YOYO RESERVA*\n\n*Nombre:* ${nom}\n*Personas:* ${pers}\n*Hora:* ${hora}\n\n¡Muchas Gracias!`;
   window.open(`https://api.whatsapp.com/send?phone=${PHONE}&text=${encodeURIComponent(msg)}`, "_blank");
-
   cerrarModalReserva();
   showToast("Reserva enviada ✓");
 }
-
+// ==================== MODAL COMBO DELIVERY ====================
+function abrirModalCombo() {
+  document.getElementById("modalCombo").style.display = "flex";
+  document.getElementById("combo_nombre").focus();
+  comboData = { platos: [], bebidas: [], zona: null, nombre: '', direccion: '' };
+  document.getElementById("combo_nombre").value = "";
+  document.getElementById("combo_zona").value = "";
+  document.getElementById("combo_direccion").value = "";
+  loadComboPlatos();
+  loadComboBebidas();
+  updateAddedPlatos();
+  updateAddedBebidas();
+}
+function cerrarModalCombo() {
+  document.getElementById("modalCombo").style.display = "none";
+}
+function addComboPlato(nombre, precio) {
+  comboData.platos.push({nombre, precio});
+  updateAddedPlatos();
+  showToast(`${nombre} agregado ✓`);
+}
+function updateAddedPlatos() {
+  const ul = document.getElementById("combo_added_platos").querySelector("ul");
+  ul.innerHTML = "";
+  comboData.platos.forEach((p, index) => {
+    const li = document.createElement("li");
+    li.style.display = "flex";
+    li.style.alignItems = "center";
+    li.style.justifyContent = "space-between";
+    li.innerHTML = `
+      <span style="flex:1; text-align:left;">${p.nombre} - S/${p.precio}</span>
+      <button class="remove-btn" onclick="removeComboPlato(${index})">×</button>
+    `;
+    ul.appendChild(li);
+  });
+}
+function removeComboPlato(index) {
+  comboData.platos.splice(index, 1);
+  updateAddedPlatos();
+}
+function addComboBebida(nombre, precio) {
+  comboData.bebidas.push({nombre, precio});
+  updateAddedBebidas();
+  showToast(`${nombre} agregado ✓`);
+}
+function updateAddedBebidas() {
+  const ul = document.getElementById("combo_added_bebidas").querySelector("ul");
+  ul.innerHTML = "";
+  comboData.bebidas.forEach((b, index) => {
+    const li = document.createElement("li");
+    li.style.display = "flex";
+    li.style.alignItems = "center";
+    li.style.justifyContent = "space-between";
+    li.innerHTML = `
+      <span style="flex:1; text-align:left;">${b.nombre} - S/${b.precio}</span>
+      <button class="remove-btn" onclick="removeComboBebida(${index})">×</button>
+    `;
+    ul.appendChild(li);
+  });
+}
+function removeComboBebida(index) {
+  comboData.bebidas.splice(index, 1);
+  updateAddedBebidas();
+}
+function guardarCombo() {
+  comboData.nombre = document.getElementById("combo_nombre").value.trim();
+  comboData.zona = document.getElementById("combo_zona").value;
+  comboData.direccion = document.getElementById("combo_direccion").value.trim();
+  if (!comboData.nombre) return showToast("Ingresa tu nombre");
+  if (comboData.platos.length === 0) return showToast("Agrega al menos un plato");
+  if (comboData.bebidas.length === 0) return showToast("Agrega al menos una bebida");
+  if (!comboData.zona) return showToast("Selecciona zona de delivery");
+  if (!comboData.direccion) return showToast("Ingresa tu dirección completa");
+  const platosTotal = comboData.platos.reduce((sum, p) => sum + p.precio, 0);
+  const bebidasTotal = comboData.bebidas.reduce((sum, b) => sum + b.precio, 0);
+  const [zonaNom, zonaPre] = comboData.zona.split("-");
+  totalCalculado = platosTotal + bebidasTotal + parseInt(zonaPre);
+  document.getElementById("confirmacion_total").textContent = `Sería S/${totalCalculado}`;
+  document.getElementById("pago_cliente").value = "";
+  document.getElementById("modalConfirmacion").style.display = "flex";
+  cerrarModalCombo();
+}
+function cerrarModalConfirmacion() {
+  document.getElementById("modalConfirmacion").style.display = "none";
+}
+function enviarComboConfirmado() {
+  const pago = document.getElementById("pago_cliente").value.trim();
+  if (!pago || isNaN(pago) || Number(pago) <= 0) {
+    showToast("Ingresa un monto válido con el que vas a cancelar");
+    return;
+  }
+  const platosMsg = comboData.platos.map(p => `${p.nombre} - S/${p.precio}`).join("\n");
+  const bebidasMsg = comboData.bebidas.map(b => `${b.nombre} - S/${b.precio}`).join("\n");
+  const [zonaNom, zonaPre] = comboData.zona.split("-");
+  const msg = `*YOYO COMBO DELIVERY*\n\n*Cliente:* ${comboData.nombre}\n*Platos:*\n${platosMsg}\n*Bebidas:*\n${bebidasMsg}\n*Zona Delivery:* ${zonaNom} - S/${zonaPre}\n*Dirección:* ${comboData.direccion}\n*Con cuanto va a cancelar:* S/${pago}`;
+  window.open(`https://api.whatsapp.com/send?phone=${PHONE}&text=${encodeURIComponent(msg)}`, "_blank");
+  cerrarModalConfirmacion();
+  showToast("¡Combo Delivery enviado! ✓ Espera tu pedido.");
+  setTimeout(resetToInicio, 700);
+}
 // ==================== PEDIDO ====================
 function irACarta() {
   document.getElementById("inicio").classList.add("hidden");
@@ -389,23 +632,19 @@ function irACarta() {
     document.getElementById("contenido").style.display = "block";
   }, 600);
 }
-
 function toggle(el) {
   el.nextElementSibling.classList.toggle("active");
 }
-
 function add(cat, nombre, precio) {
   pedido[cat].push(`${nombre} — S/${precio}`);
   showToast(`${nombre} agregado ✓`);
 }
-
 function addJarra(nombre, selectId) {
   const val = document.getElementById(selectId).value;
   const [size, price] = val.split("-");
   pedido.jarras.push(`${nombre} ${size} — S/${price}`);
   showToast(`${nombre} ${size} agregado ✓`);
 }
-
 function addLimonada() {
   const tipo = document.getElementById("limonada_tipo").value;
   const val = document.getElementById("limonada_size").value;
@@ -413,19 +652,16 @@ function addLimonada() {
   pedido.jarras.push(`Limonada ${tipo} ${size} — S/${price}`);
   showToast(`Limonada ${tipo} ${size} agregado ✓`);
 }
-
 function seleccionarMesa(n) {
   mesaSeleccionada = n;
   document.getElementById("mesaSeleccionada").innerHTML = `Mesa seleccionada: <strong>${n}</strong>`;
   document.querySelectorAll(".mesa-btn").forEach(b => b.classList.remove("active"));
   document.querySelectorAll(".mesa-btn")[n-1].classList.add("active");
 }
-
 function abrirPedido() {
   const nombre = document.getElementById("nombre").value.trim();
   if (!nombre) return showToast("Ingresa tu nombre por favor");
   if (!mesaSeleccionada) return showToast("Selecciona una mesa");
-
   let msg = `*YOYO PEDIDO*\n\n*Cliente:* ${nombre}\n*Mesa:* ${mesaSeleccionada}\n\n`;
   Object.keys(pedido).forEach(cat => {
     if (pedido[cat].length) {
@@ -435,12 +671,38 @@ function abrirPedido() {
     }
   });
   msg += "¡Muchas gracias!";
-
   window.open(`https://api.whatsapp.com/send?phone=${PHONE}&text=${encodeURIComponent(msg)}`, "_blank");
   setTimeout(resetToInicio, 700);
 }
-
 // ==================== CARGA DE MENÚ ====================
+const cocktailsList = [
+  {nombre:"Cuba Libre",precio:8},{nombre:"Chilcano de Pisco",precio:10},
+  {nombre:"Daiquiri",precio:10},{nombre:"Pisco Sour",precio:10},
+  {nombre:"Mojito",precio:10},{nombre:"Piña Colada",precio:10},
+  {nombre:"Machu Picchu",precio:10},{nombre:"Pisco Atardecer",precio:10},
+  {nombre:"Pantera Rosa",precio:10},{nombre:"Tinto de Verano",precio:12},
+  {nombre:"Sangría",precio:12},{nombre:"Calimocho",precio:12}
+];
+const piqueosList = [{nombre:"Chifle",precio:3},{nombre:"Canchita",precio:3}];
+const platosList = [
+  {nombre:"Ceviche Simple",precio:12},{nombre:"Ceviche Mixto",precio:15},
+  {nombre:"Arroz con Mariscos",precio:12},{nombre:"Chicharrón de Pota",precio:12}
+];
+const bebidasList = [
+  {nombre:"Maracuyachado 1L",precio:24},
+  {nombre:"Maracuyachado 1/2L",precio:12},
+  {nombre:"Maracumango 1L",precio:24},
+  {nombre:"Maracumango 1/2L",precio:12},
+  {nombre:"Limonada Clásica 1L",precio:16},
+  {nombre:"Limonada Clásica 1/2L",precio:8},
+  {nombre:"Limonada Hierba Luisa 1L",precio:16},
+  {nombre:"Limonada Hierba Luisa 1/2L",precio:8},
+  {nombre:"Limonada Frozen 1L",precio:16},
+  {nombre:"Limonada Frozen 1/2L",precio:8},
+  {nombre:"Coca Cola",precio:5},
+  {nombre:"Inka Cola",precio:5},
+  {nombre:"Sprite",precio:4}
+];
 function load(id, arr, cat) {
   const c = document.getElementById(id);
   arr.forEach(i => {
@@ -454,22 +716,37 @@ function load(id, arr, cat) {
     </div>`;
   });
 }
-
-load("cocktails", [
-  {nombre:"Cuba Libre",precio:8},{nombre:"Chilcano de Pisco",precio:10},
-  {nombre:"Daiquiri",precio:10},{nombre:"Pisco Sour",precio:10},
-  {nombre:"Mojito",precio:10},{nombre:"Piña Colada",precio:10},
-  {nombre:"Machu Picchu",precio:10},{nombre:"Pisco Atardecer",precio:10},
-  {nombre:"Pantera Rosa",precio:10},{nombre:"Tinto de Verano",precio:12},
-  {nombre:"Sangría",precio:12},{nombre:"Calimocho",precio:12}
-],"cocktails");
-
-load("piqueos", [{nombre:"Chifle",precio:3},{nombre:"Canchita",precio:3}],"piqueos");
-load("platos", [
-  {nombre:"Ceviche Simple",precio:12},{nombre:"Ceviche Mixto",precio:15},
-  {nombre:"Arroz con Mariscos",precio:12},{nombre:"Chicharrón de Pota",precio:12}
-],"platos");
-
+load("cocktails", cocktailsList, "cocktails");
+load("piqueos", piqueosList, "piqueos");
+load("platos", platosList, "platos");
+function loadComboPlatos() {
+  const c = document.getElementById("combo_platos_list");
+  c.innerHTML = "";
+  platosList.forEach(i => {
+    c.innerHTML += `
+    <div class="menu-item">
+      <div class="left">
+        <div class="name">${i.nombre}</div>
+        <div class="price">S/ ${i.precio}</div>
+      </div>
+      <button class="add-btn" onclick="addComboPlato('${i.nombre.replace(/'/g,"\\'")}',${i.precio})">Agregar</button>
+    </div>`;
+  });
+}
+function loadComboBebidas() {
+  const c = document.getElementById("combo_bebidas_list");
+  c.innerHTML = "";
+  bebidasList.forEach(i => {
+    c.innerHTML += `
+    <div class="menu-item">
+      <div class="left">
+        <div class="name">${i.nombre}</div>
+        <div class="price">S/ ${i.precio}</div>
+      </div>
+      <button class="add-btn" onclick="addComboBebida('${i.nombre.replace(/'/g,"\\'")}',${i.precio})">Agregar</button>
+    </div>`;
+  });
+}
 document.getElementById("jarras").innerHTML = `
 <div class="jarra-item">
   <div class="left"><div class="name">Maracuyachado</div><div class="price">1L S/24 • ½L S/12</div></div>
@@ -493,14 +770,11 @@ document.getElementById("jarras").innerHTML = `
     <button class="add-btn" onclick="addLimonada()">Agregar</button>
   </div>
 </div>`;
-
 // ==================== INICIO ====================
 window.addEventListener("load", resetToInicio);
-
 document.addEventListener("visibilitychange", () => {
   if (document.visibilityState === "visible") resetToInicio();
 });
-
 window.addEventListener("DOMContentLoaded", () => {
   document.getElementById("inicio").addEventListener("click", (e) => {
     if (e.target.tagName !== 'BUTTON') irACarta();
